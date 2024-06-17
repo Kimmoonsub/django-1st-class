@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<div class="row mt-5">
+    <div class="col-12 text-center">
+        <h1>로그인</h1>
+    </div>
+</div>
+<!-- view.py 에서 res_data={}의 내용을 전달 받아서 표시되게 함 -->
+<div class="row mt-5">
+    <div class="col-12">
+        {{ error }}
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-12">
+        <!--form method="POST" or "GET" -> 웹의 내용을 파이썬에 전달하는 기능, action="." 현재 페이지에서 작동  -->
+        <form method="POST" action=".">
+            <!-- 보안문제로 약용하는 사례 막기위해 크로스도메인을 막기위해 암호화 -->
+            {% csrf_token %}
+            <!-- name 속성값이 있어야 주요 키로 작용함. 없으면 안좋음 -->
+            <!-- forms.py에서 레이블 내용 설정 가능함 -->
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}" placeholder="{{ field.label }}" name="{{ field.name }}" />
+            </div>
+            {% if field.errors %}
+            <span style="color: red">{{ field.errors }}</span>
+            {% endif %}
+            {% endfor%}
+            <button type="submit" class="btn btn-primary">로그인</button>
+        </form>
+    </div>
+</div>
+ {% endblock %}  

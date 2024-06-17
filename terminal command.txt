@@ -1,0 +1,2 @@
+fcdjango_venv/scripts/activate
+cd fc_community
