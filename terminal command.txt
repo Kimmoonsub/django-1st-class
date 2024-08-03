@@ -1,2 +1,2 @@
-fcdjango_venv/scripts/activate
+fc_venv/scripts/activate
 cd fc_community
